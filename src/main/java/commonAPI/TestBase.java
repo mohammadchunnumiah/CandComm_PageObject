@@ -28,7 +28,7 @@ import java.util.*;
 
 
 public class TestBase {
-
+    //Global variabls
     public final Logger log = Logger.getLogger(TestBase.class.getName());
     public WebDriver dr;
     public EventFiringWebDriver driver;
@@ -37,43 +37,47 @@ public class TestBase {
     public ExtentReports extentReports;
     public ExtentTest test;
 
-    public void loadProperties()throws IOException{
+    // Code to read value from properties file
+    public void loadProperties() throws IOException {
         OR = new Properties();
-        File file = new File(System.getProperty("user.dir")+"//src//main//java//config//config.properties");
+        File file = new File(System.getProperty("user.dir") + "//src//main//java//config//config.properties");
         FileInputStream f = new FileInputStream(file);
         OR.load(f);
     }
 
-    public void init()throws IOException {
+    //Initialize values to be called
+    public void init() throws IOException {
         loadProperties();
         selectBrowser(OR.getProperty("browser"));
-        getUrl(OR.getProperty("url"));
+//        getUrl(OR.getProperty("url")); //https://cfbappportalqa.azurewebsites.net
+        getUrl(OR.getProperty("endpointurl")); // https://cfbrpqa.azurewebsites.net/Candidate/Index/1009
         String log4jConfigPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfigPath);
     }
 
-    public void selectBrowser(String browser){
-        if(browser.equals("chrome")||browser.equals("CHROME")){
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/drivers/chromedriver_81.exe");
-            log.info("Creating the object of "+browser);
+    // Initializing browser
+    public void selectBrowser(String browser) {
+        if (browser.equals("chrome") || browser.equals("CHROME")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/chromedriver_81.exe");
+            log.info("Creating the object of " + browser);
             dr = new ChromeDriver();
-            driver=new EventFiringWebDriver(dr);
+            driver = new EventFiringWebDriver(dr);
             //eventListener= new WebEventListener();
             //driver.register(eventListener);
-        }else if (browser.equals("firefox")||browser.equals("FIREFOX")){
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"");
-            log.info("Creating the object of "+browser);
+        } else if (browser.equals("firefox") || browser.equals("FIREFOX")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/geckodriver.exe");
+            log.info("Creating the object of " + browser);
             dr = new ChromeDriver();
             dr = new ChromeDriver();
-            driver=new EventFiringWebDriver(dr);
+            driver = new EventFiringWebDriver(dr);
             //eventListener= new WebEventListener();
             //driver.register(eventListener);
-        }else if(browser.equals("ie")||browser.equals("IE")){
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/");
-            log.info("Creating the object of "+browser);
+        } else if (browser.equals("ie") || browser.equals("IE")) {
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/");
+            log.info("Creating the object of " + browser);
             dr = new ChromeDriver();
             dr = new ChromeDriver();
-            driver=new EventFiringWebDriver(dr);
+            driver = new EventFiringWebDriver(dr);
             //eventListener= new WebEventListener();
             //driver.register(eventListener);
         }
@@ -87,9 +91,9 @@ public class TestBase {
     }*/
 
 
-
-    public void getUrl(String url){
-        log.info("Navigating to "+url);
+    // Calling url from repository
+    public void getUrl(String url) {
+        log.info("Navigating to " + url);
         dr.get(url);
         dr.manage().window().maximize();
     }
@@ -101,78 +105,79 @@ public class TestBase {
         return data;
     }*/
 
-    public void waitForElement(int timeOutInSeconds, WebElement element){
-        WebDriverWait wait = new WebDriverWait(dr,timeOutInSeconds);
+    // Synchronization the scripts
+    public void waitForElement(int timeOutInSeconds, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(dr, timeOutInSeconds);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    // Handling windows
+    public Iterator<String> getAllWindows() {
+        Set<String> window = dr.getWindowHandles();
+        Iterator<String> itr = window.iterator();
+        return itr;
+    }
 
-        public Iterator<String> getAllWindows(){
-            Set<String> window = dr.getWindowHandles();
-            Iterator<String> itr = window.iterator();
-            return itr;
-        }
+    // To create log file
+    public void log(String data) {
+        log.info(data);
+        Reporter.log(data);
+    }
 
-
-        public void log(String data){
-            log.info(data);
-            Reporter.log(data);
-        }
-
+    // Generate extendReport only pass/fail without screenshot and log
     @BeforeTest
-    public void setExtentReports(){
-        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir")+"/src/reports/myReport.html");
-        htmlReporter.config().setDocumentTitle("Automation Report");//title of the report
-        htmlReporter.config().setReportName("Functional Report");//name of the report
+    public void setExtentReports() {
+        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/reports/AutomationReport.html");
+        htmlReporter.config().setDocumentTitle("Automation Report"); //title of the report
+        htmlReporter.config().setReportName("Functional Report"); //name of the report
         htmlReporter.config().setTheme(Theme.DARK);
 
+        // to create html Report
         extentReports = new ExtentReports();
         extentReports.attachReporter(htmlReporter);
 
-        extentReports.setSystemInfo("Host Name","LocalHost");
-        extentReports.setSystemInfo("OS","WINDOWS 10");
+        // Environmental information
+        extentReports.setSystemInfo("Host Name", "LocalHost");
+        extentReports.setSystemInfo("OS", "WINDOWS 10");
         extentReports.setSystemInfo("Tester Name", "Miah");
         extentReports.setSystemInfo("Browser", "Chrome");
 
     }
+
     @AfterTest
-    public void endReport(){
+    public void endReport() {
         extentReports.flush();
     }
 
-    //in this test i will verify every method will pass, fail or skip and based on the status i will update the result into the report
+    //In this test i will verify every method will pass, fail or skip and based on the status i will update the result into the report
     @AfterMethod
     public void tearDown(ITestResult result) throws IOException {
-        if (result.getStatus()==ITestResult.FAILURE){
-            test.log(Status.FAIL,"Test is failed"+result.getName());//to add name in the extent report
-            test.log(Status.FAIL,"Test is failed"+result.getThrowable());//to add error/exception to the report
+        if (result.getStatus() == ITestResult.FAILURE) {
+            test.log(Status.FAIL, "Test is failed" + result.getName()); //to add name in the extent report
+            test.log(Status.FAIL, "Test is failed" + result.getThrowable()); //to add error/exception to the report
 
             //if the status is failed, we need to take screenshot
+            String screenShot = TestBase.getScreenShot(driver, result.getName());
+            test.addScreenCaptureFromPath(screenShot); //adding screen shot
 
-            String screenShot = TestBase.getScreenShot(driver,result.getName());
-            test.addScreenCaptureFromPath(screenShot);//adding screen shot
-
-        }else if(result.getStatus()==ITestResult.SKIP){
-            test.log(Status.SKIP,"TTest is skipped"+result.getName());
-        }else if (result.getStatus()==ITestResult.SUCCESS){
-            test.log(Status.PASS,"Test is passed"+result.getName());
+        } else if (result.getStatus() == ITestResult.SKIP) {
+            test.log(Status.SKIP, "Test is skipped" + result.getName());
+        } else if (result.getStatus() == ITestResult.SUCCESS) {
+            test.log(Status.PASS, "Test is passed" + result.getName());
         }
         driver.quit();
     }
 
+    // to get screenshot on the failed test
     public static String getScreenShot(WebDriver driver, String screenShotName) throws IOException {
         String dataName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
 
         //after execution you could see a folder under src directory
-        String destination = System.getProperty("user.dir")+"/ScreenShotReport/"+ screenShotName + dataName + ".png";
+        String destination = System.getProperty("user.dir") + "/ScreenShotReport/" + screenShotName + dataName + ".png";
         File fileDestination = new File(destination);
-        FileUtils.copyFile(source,fileDestination);
+        FileUtils.copyFile(source, fileDestination);
         return destination;
     }
-
-
-
-
 }

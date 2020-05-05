@@ -1,12 +1,12 @@
 package pageLibrary;
 
-import commonAPI.TestBase1;
+import commonAPI.TestBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage extends TestBase1 {
+public class LoginPage extends TestBase {
     WebDriver driver;
 
 //    public static final Logger log = Logger.getLogger(HomePage.class.getName());
@@ -17,7 +17,7 @@ public class LoginPage extends TestBase1 {
     @FindBy(xpath="//input[@name='Password']")
     WebElement userPassword;
 
-    @FindBy(xpath="////button[@name='button']")
+    @FindBy(xpath="//button[@name='button']")
     WebElement signInButton;
 
     public LoginPage(WebDriver driver){
