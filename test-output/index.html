@@ -49,7 +49,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Miah\AppData\Local\Temp\testng-eclipse--627518880\testng-customsuite.xml</span>
+                    <span>C:\Users\Miah\AppData\Local\Temp\testng-eclipse-1763376666\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -102,7 +102,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="loginPage.TC001_LoginPage" class="method navigator-link" hash-for-method="candidateLogin">candidateLogin</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="testExecution.Verify_CandidatePage" class="method navigator-link" hash-for-method="candidateLogin">candidateLogin</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -120,7 +120,7 @@
           <div class="suite-Default_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
               <img src="failed.png"/>
-              <span class="class-name">loginPage.TC001_LoginPage</span>
+              <span class="class-name">testExecution.Verify_CandidatePage</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -128,16 +128,14 @@
                   <a name="candidateLogin">
                   </a> <!-- candidateLogin -->
                   <span class="method-name">candidateLogin</span>
-                  <div class="stack-trace">org.openqa.selenium.InvalidSelectorException: invalid selector: Unable to locate an element with the xpath expression ////button[@name=&apos;button&apos;] because of the following error:
-SyntaxError: Failed to execute &apos;evaluate&apos; on &apos;Document&apos;: The string &apos;////button[@name=&apos;button&apos;]&apos; is not a valid XPath expression.
-  (Session info: chrome=81.0.4044.129)
-For documentation on this error, please visit: http://seleniumhq.org/exceptions/invalid_selector_exception.html
+                  <div class="stack-trace">org.openqa.selenium.WebDriverException: chrome not reachable
+  (Session info: chrome=83.0.4103.61)
 Build info: version: &apos;3.8.1&apos;, revision: &apos;6e95a6684b&apos;, time: &apos;2017-12-01T18:33:54.468Z&apos;
-System info: host: &apos;DESKTOP-201SK39&apos;, ip: &apos;192.168.1.28&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;12.0.1&apos;
+System info: host: &apos;DESKTOP-201SK39&apos;, ip: &apos;192.168.1.13&apos;, os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;12.0.1&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 81.0.4044.129, chrome: {chromedriverVersion: 81.0.4044.69 (6813546031a4b..., userDataDir: C:\Users\Miah\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:63403}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
-Session ID: c7a7dd3b458be18eac555e3e394eb30d
-*** Element info: {Using=xpath, value=////button[@name=&apos;button&apos;]}
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 83.0.4103.61, chrome: {chromedriverVersion: 83.0.4103.39 (ccbf011cb2d2b..., userDataDir: C:\Users\Miah\AppData\Local...}, goog:chromeOptions: {debuggerAddress: localhost:51743}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 9b28d4877237ec49caf56597c8ff9bb3
+*** Element info: {Using=xpath, value=//input[@id=&apos;candshowMore&apos;]}
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -163,8 +161,8 @@ Session ID: c7a7dd3b458be18eac555e3e394eb30d
 	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:69)
 	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
 	at com.sun.proxy.$Proxy17.click(Unknown Source)
-	at pageLibrary.LoginPage.CFBPortalLogin(LoginPage.java:31)
-	at loginPage.TC001_LoginPage.candidateLogin(TC001_LoginPage.java:24)
+	at pageLibrary.LoginPage.CFBPortalLogin(LoginPage.java:46)
+	at testExecution.Verify_CandidatePage.candidateLogin(Verify_CandidatePage.java:29)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -199,7 +197,7 @@ Session ID: c7a7dd3b458be18eac555e3e394eb30d
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Miah\AppData\Local\Temp\testng-eclipse--627518880\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Miah\AppData\Local\Temp\testng-eclipse-1763376666\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -208,7 +206,7 @@ Session ID: c7a7dd3b458be18eac555e3e394eb30d
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;loginPage.TC001_LoginPage&quot;/&gt;
+      &lt;class name=&quot;testExecution.Verify_CandidatePage&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -251,13 +249,13 @@ data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'candidateLogin')
-data.setCell(0, 2, 'loginPage.TC001_LoginPage')
-data.setCell(0, 3, 744);
+data.setCell(0, 2, 'testExecution.Verify_CandidatePage')
+data.setCell(0, 3, 17660);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 744 ms</span>
+              <span class="suite-total-time">Total running time: 17 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -283,29 +281,27 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">loginPage.TC001_LoginPage</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">testExecution.Verify_CandidatePage</div> <!-- chronological-class-name -->
               <div class="configuration-test before">
                 <span class="method-name">setExtentReports</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-method before">
                 <span class="method-name">setUp</span>
-                <span class="method-start">157 ms</span>
+                <span class="method-start">161 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">candidateLogin</span>
-                <span class="method-start">6796 ms</span>
+                <span class="method-start">10218 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">tearDown([TestResult name=candidateLogin status=FAILURE method=TC001_LoginPage.candidateLogin()[pri:0, instan...)</span>
-                <span class="method-start">7544 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">tearDown([TestResult name=candidateLogin status=FAILURE method=Verify_CandidatePage.candidateLogin()[pri:0, i...)</span>
+                <span class="method-start">27888 ms</span>
               </div> <!-- configuration-method after -->
-              <div class="configuration-test after">
-                <span class="method-name">endReport</span>
-                <span class="method-start">9079 ms</span>
-              </div> <!-- configuration-test after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
       </div> <!-- main-panel-root -->

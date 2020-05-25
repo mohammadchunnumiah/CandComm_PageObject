@@ -3,6 +3,8 @@ package commonAPI;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.apache.commons.io.FileUtils;
@@ -49,8 +51,7 @@ public class TestBase {
     public void init() throws IOException {
         loadProperties();
         selectBrowser(OR.getProperty("browser"));
-//        getUrl(OR.getProperty("url")); //https://cfbappportalqa.azurewebsites.net
-        getUrl(OR.getProperty("endpointurl")); // https://cfbrpqa.azurewebsites.net/Candidate/Index/1009
+        getUrl(OR.getProperty("url")); //https://cfbappportalqa.azurewebsites.net
         String log4jConfigPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfigPath);
     }
@@ -58,14 +59,14 @@ public class TestBase {
     // Initializing browser
     public void selectBrowser(String browser) {
         if (browser.equals("chrome") || browser.equals("CHROME")) {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/chromedriver_81.exe");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/chromedriver_83.exe");
             log.info("Creating the object of " + browser);
             dr = new ChromeDriver();
             driver = new EventFiringWebDriver(dr);
             //eventListener= new WebEventListener();
             //driver.register(eventListener);
         } else if (browser.equals("firefox") || browser.equals("FIREFOX")) {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/drivers/geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/drivers/geckodriver.exe");
             log.info("Creating the object of " + browser);
             dr = new ChromeDriver();
             dr = new ChromeDriver();
@@ -96,6 +97,7 @@ public class TestBase {
         log.info("Navigating to " + url);
         dr.get(url);
         dr.manage().window().maximize();
+        dr.manage().deleteAllCookies();
     }
 
   /*  public String[][] getData(String excelName, String sheetName) {
@@ -127,7 +129,9 @@ public class TestBase {
     // Generate extendReport only pass/fail without screenshot and log
     @BeforeTest
     public void setExtentReports() {
+//        htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/reports/AutomationReport.html");
         htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/src/reports/AutomationReport.html");
+
         htmlReporter.config().setDocumentTitle("Automation Report"); //title of the report
         htmlReporter.config().setReportName("Functional Report"); //name of the report
         htmlReporter.config().setTheme(Theme.DARK);
@@ -143,7 +147,7 @@ public class TestBase {
         extentReports.setSystemInfo("Browser", "Chrome");
 
     }
-
+    
     @AfterTest
     public void endReport() {
         extentReports.flush();

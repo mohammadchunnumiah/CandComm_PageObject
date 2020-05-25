@@ -3,15 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="loginPage.TC001_LoginPage">
+      <class name="testExecution.Verify_CandidatePage">
         <methods>
           <include name="setExtentReports"/>
-          <include name="tearDown"/>
           <include name="setUp"/>
+          <include name="tearDown"/>
           <include name="endReport"/>
           <include name="candidateLogin"/>
         </methods>
-      </class> <!-- loginPage.TC001_LoginPage -->
+      </class> <!-- testExecution.Verify_CandidatePage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
